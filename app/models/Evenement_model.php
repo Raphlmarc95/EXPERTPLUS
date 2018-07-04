@@ -164,9 +164,9 @@ class Evenement_model extends CI_Model {
     function evenement_membre() {
       
         if (isset($_GET['id'])) {
-            $id_membre = $_GET['id'] (int);
+            $id_membre = $_GET['id'];
             $r = "SET lc_time_names = 'fr_FR'";
-            $sql = 'SELECT  DATE_FORMAT(evenement.date_debut, "%d %M %Y") as event_mois, DATE_FORMAT(evenement.date_debut, "%a %d %M %Y %r") as event_deb, DATE_FORMAT(evenement.date_fin, "%a %d %M %Y %r") as event_fin, evenement.idevenement, evenement.photo, evenement.titre, evenement.lieuEvenement, evenement.description, evenement.date_creation, evenement.activite, evenement.date_debut, evenement.date_fin, evenement.prix, evenement.point_de_vente,membre.photo AS m_foto, membre.pseudo, membre.email, evenement.idmembre FROM evenement INNER JOIN membre on evenement.idmembre = membre.idmembre WHERE membre.`idmembre = ?';
+            $sql = 'SELECT  DATE_FORMAT(evenement.date_debut, "%d %M %Y") as event_mois, DATE_FORMAT(evenement.date_debut, "%a %d %M %Y %r") as event_deb, DATE_FORMAT(evenement.date_fin, "%a %d %M %Y %r") as event_fin, evenement.idevenement, evenement.photo, evenement.titre, evenement.lieuEvenement, evenement.description, evenement.date_creation, evenement.activite, evenement.date_debut, evenement.date_fin, evenement.prix, evenement.point_de_vente,membre.photo AS m_foto, membre.pseudo, membre.email, evenement.idmembre FROM evenement INNER JOIN membre on evenement.idmembre = membre.idmembre WHERE membre.idmembre = ?';
             $req = $this->db->query($sql, array($id_membre));
 
             if ( $req->num_rows() > 0 ) {
