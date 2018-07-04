@@ -42,7 +42,7 @@
             
                <div class="columns large-12" style="margin-top:0.4em;"> 
              <a href="<?php echo base_url('login/sign_up'); ?>"> 
-              <input type="button" id="" class="fill_button" name="sign_up" value="Nouveau compte"/> </a>
+              <input type="button" id="" class="border_button" name="sign_up" style="width:100%" value="Nouveau compte"/> </a>
             </div>
             
             

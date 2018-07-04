@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Event extends CI_Controller {
 
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/
 	function __construct() {
 	  parent::__construct();
 	  $this->load->library(array('session'));
@@ -14,6 +20,12 @@ class Event extends CI_Controller {
 	  $this->load->library('pagination');
 	}
 
+	/**
+	* function notify
+	* @access public 
+	* @return void
+	*
+	*/
 	function notify () {
  		$data = new stdClass();
 
@@ -33,6 +45,12 @@ class Event extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 
+	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
 	function index() {
 		$this->load->model('evenement_model');
 		if ( isset( $_GET['search'] )) {
@@ -84,12 +102,12 @@ class Event extends CI_Controller {
 					$foto 	  = $data['file_name'];
 					$this->evenement_model->add($nom,$user_id,$lieuEvent,$dateEvent,$descEvent, $datedebutEvent,$datefinEvent,$Activites,$prix,$pointDevente,$foto );
 
-	    			$_SESSION['flash']['success'] = 'L\'evenement a été mise a jour.';
+	    			$_SESSION['flash']['success'] = 'L\'événement a été mise a jour.';
 	    			$this->notify();
 	    			// $this->load->view('templates/header');	  
 					redirect('event/index'); 
 	    		} else { 
-	    			$_SESSION['flash']['alert'] = 'Veuille remplir tous les champs';
+	    			$_SESSION['flash']['alert'] = 'Veuillez remplir tous les champs';
 	    			$this->notify();
 					// $this->load->view('templates/header');
 					$this->load->view('evenement/index');
@@ -104,6 +122,12 @@ class Event extends CI_Controller {
 	    }
 	}
 
+	/**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
 	function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {
@@ -118,47 +142,25 @@ class Event extends CI_Controller {
 		}
 	}
 
+	/**
+	* function enlever
+	* @access public 
+	* @return void
+	*
+	*/
 	function enlever() {
 		$idevenement = $_GET['idevenement'];
 		$this->evenement_model->delete($idevenement);
 		redirect('event/index');
 	}
 
-	// function modifier () {
-	// 	$data = new stdClass();
-	// 	$notifications = $this->evenement_model->count_notify();
-		
-	// 	foreach ($notifications as $notification ) {
-	// 		$notification->event_notify = $this->evenement_model->notification();
-	// 	}
-
-	// 	$data->notifications = $notifications;
-
-	// 	$this->load->view('templates/header');
-	// 	$this->load->view('evenement/modifier', $data);
-	// }
-
-
-
-	// function likes() {
-	// 	$like = 1; 
-	// 	$idevent = $this->uri->segment(3);
-	// 	// $req  = $this->evenement_model->likes($like);
-
-	// 	$data  = new stdClass();
-	// 	$likes = $this->evenement_model->liked($like, $idevent);
-		
-	// 	// foreach ($likes as $like ) {
-	// 	// 	// $notification->event_likes = $this->evenement_model->likes();
-	// 	// }
-
-	// 	$data->likes = $likes;
-	
-	// 	$this->load->view('templates/header');
-	// 	$this->load->view('evenement/index', $data); 
-	// }
-
-	 function modifier () {
+	/**
+	* function modifier
+	* @access public 
+	* @return void
+	*
+	*/
+	function modifier () {
 	 	if ($this->input->post('addEvent')) {
 	 		$col = $this->evenement_model->modifier_evenement();
 	 		$_SESSION['flash']['success'] = 'Modification reussie.';
@@ -166,26 +168,21 @@ class Event extends CI_Controller {
 	 	}
 	}
 
+	/**
+	* function evenement_membre
+	* @access public 
+	* @return void
+	*
+	*/
 	function evenement_membre() {
 		$req = $this->evenement_model->evenement_membre();
-		if(!empty($req)){
-			$this->notify();
-			foreach ($req as $key ) {
-				$data = array ( 
-					'titre' => $key->titre ,
-					'description' => $key->description,
-					'photo'=> $key->photo,
-					'lieuEvenement'=> $key->lieuEvenement,
-					'date_debut'=> $key->date_debut,
-					'date_fin'=> $key->date_fin,
-					'idevenement'=> $key->idevenement
-					
-				);
-				$this->load->view('evenement/auteur_evenement', $data);
-			}
-		} else {
-			// $this->notify();
-			redirect('event/index');
-		}
+		
+		$this->notify();
+		$d = new stdClass();
+
+        $d->req = $req; 
+        
+		$this->load->view('evenement/auteur_evenement', $d);
+		$this->load->view('templates/footer');		
     }
 }

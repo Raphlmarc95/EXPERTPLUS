@@ -26,27 +26,33 @@
 
     <?php $livres = $this->Collection_model->index_livres(); ?>
     <?php  foreach($livres as $rows): ?>
+      <? var_dump($livres)?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <div id="info_ouvrage" style="width: 180px;">
+                      <strong><?php echo $rows->titre;?> </strong><br />
+                              <?php echo $rows->pseudo;?>
+
+                       </div>
         </a>
       </div>
 
 <!-- modal infoOuvrage Romans -->
 <div class="reveal large" id="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>" data-reveal>
 
-<div class="row" style="padding:2em; background-color:#ececec; justify-content:center;">
+<div class="row" style="padding:2em; justify-content:center;">
 
 <div class="columns medium-12 " style="margin-top:1em;">
 
-<div class="columns medium-12" style="text-align:center;">
+<div class="columns medium-12 large" style="text-align:center;">
 <h5 style="margin:0px"><strong><?php echo $rows->titre; ?></strong></h5>
 Publier par : <?php echo $rows->pseudo; ?> <br />
 Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -61,7 +67,7 @@ Email : <?php echo $rows->email; ?>
 
 </div>
 
-<div class="row" style="border:2px solid red">
+<div class="row" style="border:0.4px solid  white ">
 <div class="columns medium-6">
 <div class="columns medium-12">
 <strong><u>Specifications</u></strong>
@@ -87,7 +93,7 @@ Email : <?php echo $rows->email; ?>
 <strong>Point de vente :</strong> <?php echo $rows->point_de_vente; ?>
 </div>
 </div>
-<div class="columns large-5" style="text-align:center; margin-top:2em" >
+<div class="columns large-5 small-12" style="text-align:center; margin-top:2em" >
   <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
      <button class="fill_button" >
         Commencer la lecture 
@@ -103,7 +109,7 @@ Email : <?php echo $rows->email; ?>
 </div>
  
 <button class="close-button" data-close aria-label="Close reveal" type="button">
-<span aria-hidden="true" style="color:yellow;">&times;</span>
+<span aria-hidden="true">&times;</span>
 </button>
 </div>
 <!--  fin modalInfoOuvrage Romans-->
@@ -117,7 +123,7 @@ Email : <?php echo $rows->email; ?>
     <div class="row">
       <div class="columns large-12" style="text-align:center;">
        <a href="http://localhost/biblioplus/collection/index"> 
-          <button class="fill_button" href="#" >
+          <button class="border_button" href="#" >
           Vers tous les ouvrages <i class="fas fa-arrow-right"></i>
           </button>
         </a>
@@ -127,8 +133,8 @@ Email : <?php echo $rows->email; ?>
          <!-- TOP 3 AUTEURS -->
 <div class="auteur_setion">
   <div class="row" style="justify-content:center;" >
-    <div class="columns small-12 medium-12 large-12"> <h3>Les auteurs de la semaine</h3> </div>
-    <?php if ($auteurs) {?> <pre><?php // var_dump($auteurs)?></pre>
+    <div class="columns small-12 medium-12 large-12"> <h4>Les auteurs de la semaine</h4> </div>
+    <?php if ($auteurs) {?>
       <?php foreach ($auteurs as $rows ): ?>
         <?php if($rows->status === 'Auteur'): ?>
         <div  class="columns large-4 medium-6 small-10">
@@ -155,61 +161,48 @@ Email : <?php echo $rows->email; ?>
   </div>
 </div>
 
-
-
-
   <div class="row">
     <div class="columns large-12 medium-12" style=" margin-top:2em; text-align:center;">
       <h3>Les &eacutev&eacutenements les plus proches</h3>
-      <p>Amant du livre, vous qui ne voulez pas manquer un &eacutev&eacutenement auxquels vous voudriez prendre part<br/> dans cette section vous resterez informer.</p>                      
+      <p>Amant du livre, vous qui ne voulez pas manquer un &eacutev&eacutenement auxquel vous voulez prendre part<br/> dans cette section vous resterez informer.</p>                      
     </div> 
   </div>
-    <div class="row " style=" justify-content:center;" >
+    <div class="row" style=" justify-content:center;" >
           <?php $req = $this->evenement_model->lister_event_index(); ?>
           <?php if($req): ?>
             <?php foreach ($req as $key ): ?>
             
-      <div class=" columns large-3  medium-4 small-9"  data-open="<?php echo $key->idevenement.'event'; ?>"  style=" padding:0px; margin:15px;background-color:#dcece2;">
-        
-                    
+      <div class=" columns large-3  medium-4 small-9 evenement"  data-open="<?php echo $key->idevenement.'event'; ?>" 
+      style="padding:0px; margin:15px;background-color:#dcece2;">
+                            
          <?php if(empty($key->photo )){ ?>
               <img src="http://via.placeholder.com/350x200" class="thumbnail"   />
             <?php } else {?>
-             <img src="<?php echo base_url('assets/img/'.$key->photo); ?>"  style="width: 100%; height:170px; " />
+             <img src="<?php echo base_url('assets/img/'.$key->photo); ?>" style="width: 100%; height:170px;" />
            <?php } ?>
          <!-- end of photo -->
     
-             <div class="columns large-12 medium-12 small-12"  > <!-- info -->
-               <div class="columns large-12 medium-12 small-12"><span class="span_titre" ><?php echo $key->titre; ?></span>
+             <div class="columns large-12 medium-12 small-12"> <!-- info -->
+               <div class="columns large-12 medium-12 small-12">
+                <span class="span_titre" ><?php echo $key->titre; ?></span>
                </div>
              </div>
            <div class="columns large-8 medium-8 small-8" >      
            <strong><?php echo $key->event_mois; ?></strong><br>
             <span class="span_description"><?php echo $key->lieuEvenement; ?></span>
           </div>
-
            
              <div class="columns large-3 medium-4 small-4 ">
               
                 <?php if(empty($key->m_foto)){ ?>
-                  <img style="border-radius: 50%; width: 30px; height: 30px; " src="<?php echo base_url('assets/avatar/avatar.png'); ?>" title="<?php echo $key->pseudo; ?>"  alter="photo utilisateur" />
+                  <img style="border-radius: 50%; width: 30px; height: 30px; " src="<?php echo base_url('assets/avatar/avatar.png'); ?>" title="<?php echo $key->pseudo; ?>"  alt="photo utilisateur" />
                 <?php } else { ?>
                  <img  style="border: 0px; width:35px; height:35px;" src="<?php echo base_url('assets/avatar/'.$key->m_foto); ?>" class="circle_round_evenement" />
                <?php } ?>
             
            </div> 
 
-         </div>
-
-        
-        
-        
-    <!--     
-         <div class="columns large-12 medium-12" align="right">
-         <span style="font-style: italic; font-size: 12px;">
-          </span>
-       </div> -->
-      
+         </div> 
      
 
        <!-- Modal Voir un evenement -->
@@ -220,21 +213,45 @@ Email : <?php echo $rows->email; ?>
               margin-right:auto;" >
             
                   
+            
+            
+               <?php if(empty($key->photo )){ ?>
+                  <img src="http://via.placeholder.com/350x200" class="thumbnail" style="width: 200px; height:250px; "  />
+                <?php } else {?>
+                 <img src="<?php echo base_url('assets/img/'.$key->photo); ?>" class="thumbnail" style="width:100%; height:210px; " />
+               <?php } ?>
+           
                 
                 
-                   <?php if(empty($key->photo )){ ?>
-                      <img src="http://via.placeholder.com/350x200" class="thumbnail" style="width: 200px; height:250px; "  />
-                    <?php } else {?>
-                     <img src="<?php echo base_url('assets/img/'.$key->photo); ?>" class="thumbnail" style="width:100%; height:210px; " />
-                   <?php } ?>
-               
-                
-                
-            <?php if ($this->session->userdata('idmembre') === $key->idmembre) : ?>
-              <div class=" columns large-12 medium-12" style="border-bottom: 1px solid #f3f1f1; margin-bottom:5px; margin-top: 10px;">
-                   <a href="#" data-open="<?php echo $key->idevenement.'evente';  ?>" ><i class="fa fa-edit"></i>modifier </a> 
-                   <a  href="http://localhost/biblioplus/event/enlever?idevenement=<?php echo $key->idevenement; ?>" title="supprimer votre événement"><i class="fa fa-trash"></i>
-                   Supprimer  </a>              
+          <?php if ($this->session->userdata('idmembre') === $key->idmembre) : ?>
+            <div class=" columns large-12 medium-12" style="border-bottom: 1px solid #f3f1f1; margin-bottom:5px; margin-top: 10px;">
+                 <a href="#" data-open="<?php echo $key->idevenement.'evente';  ?>" ><i class="fa fa-edit"></i>modifier </a>
+
+                 <a  href="#" data-open="modal_modifier_compte">
+                  <i class="fa fa-trash">  </i>
+                    Supprimer 
+                  </a> 
+
+                    
+
+      <div class="reveal" id="modal_supp_evenements"  data-reveal>
+<h6>Confirmation de suppression  </h6>
+<hr>
+  
+<span class="span_description" style="text-align:center;">Voulez vous vraiment supprimer cet evenement?
+</span>
+  
+<div class="columns small-12 medium-7 large-12" style="text-align:center;">  
+     
+      <button class="fill_button" aria-label="Dismiss alert" type="button" data-close>
+          NON
+        </button>      
+ <a  href="http://localhost/biblioplus/event/enlever?idevenement=<?php echo $key->idevenement; ?>" title="supprimer votre événement"><i class="fa fa-trash"> </i>
+        <button class="fill_button">OUI</button>  </a>
+      </div>
+      </div>
+
+
               </div>
             <?php endif ?>
                  <!-- fin modal suppression evenement --> 
@@ -371,21 +388,26 @@ Email : <?php echo $rows->email; ?>
 <?php endforeach ?>
 <?php endif ?>
 </div>
-<div class="row">  
-<div class="columns large-3 large-centered" >
-<a href="http://localhost/biblioplus/event/index"><button class="border_button"> Voir les evenements</button></a>
-</div> 
+<div class="row">
+      <div class="columns large-12" style="text-align:center;">
+       <a href="http://localhost/biblioplus/event/index"> 
+          <button class="border_button" href="#" >
+          Voir tous les evenements <i class="fas fa-arrow-right"></i>
+          </button>
+        </a>
+      </div>
+    </div>
 
 </div>
 
 
 <hr>
-<div class="row" style="justify-content:center;  margin-top:2em;">
+<div class="row" style="justify-content:center;  margin-top:2em;  text-align:center;">
 
-  <div class="columns large-10" align="center">
+  
   <?php if ($notifications) : ?>
   <?php foreach ($notifications as $key ) :?>
-<div class="columns large-2">
+<div class="columns large-2 info_sit">
   <h6> Membres</h6>
     <?php echo " ".$key->membres[0]->nbr_membre; ?> 
 </div>
@@ -404,18 +426,13 @@ Email : <?php echo $rows->email; ?>
 </div>
   <?php endforeach ?>
 <?php endif ?>
-
-  <?php if(site_url('account/')){ ?>
-    <?php // echo 'Le moi'; ?>
-    <?php $v = $this->login_model->count_nbr_visiteur();?>
 <div class="columns large-2">
+<?php //if(site_url('account/')){ ?>
+    <?php // echo 'Le moi'; ?>
     <h6>Visiteurs</h6>
-     <?=  $v[0]->nbr_visiteurs; ?>
-  <?php } else {
-    echo " ";
-  } ?>
-    
-  </div>
+    <?php $v = $this->login_model->count_nbr_visiteur(); echo  $v[0]->nbr_visiteurs; 
+   ?><?php //}   ?>
+    </div>
 
 </div>
 </div>

@@ -14,7 +14,7 @@
   <?php foreach ($auteurs as $key ):?>
 
   <div class="columns medium-12">
-    <h1>Profil <?= $key->pseudo; ?> </h1>
+    <h3>Profil de <?= $key->pseudo; ?> </h3>
   </div>
   <?php endforeach ?>
 
@@ -41,13 +41,13 @@
       <?php if(  $this->session->userdata('idmembre') === $_GET['id'] ) {?>
       <div id="compte">
         <span class="spanInfoUtilisateur">Compte</span >
-        <a href="http://localhost/biblioplus/auteur/ferme_compter?id=<?php echo $key->idmembre; ?>"> 
-          <button class="fill_button">Fermer</button>
-        </a>
+       
+          <button class="fill_button"  data-open="modal_supp_compte" >Fermer</button>
+       <!--  </a> -->
         <a href="http://localhost/biblioplus/auteur/modifier_compte?id=<?php echo $key->idmembre; ?>">
 
         <a href="#">
-         <button class="fill_button" data-open="modal_modifier_compte" >Modifier</button>
+         <button class="fill_button" data-open="modal_modifier_compte" >Mise a jour</button>
         </a>
       </div>
       <?php } ?>
@@ -116,6 +116,24 @@
 
   </div>
 </div>
+
+<div class="reveal" id="modal_supp_compte"  data-reveal>
+<h6>Confirmation de fermeture </h6>
+<hr>
+  
+<span class="span_description" style="text-align:center;">Voulez vous vraiment supprimer votre compte?
+</span>
+  
+<div class="columns small-12 medium-7 large-12" style="text-align:center;">  
+     
+      <button class="fill_button" aria-label="Dismiss alert" type="button" data-close>
+          NON
+        </button>      
+ <a href="http://localhost/biblioplus/auteur/ferme_compter?id=<?php echo $key->idmembre; ?>"> 
+        <button class="fill_button">OUI</button>  </a>
+      </div>
+      </div>
+
 
 <!-- debut modal_modifier_compte -->
 <div class="reveal small" id="modal_modifier_compte"  data-reveal>

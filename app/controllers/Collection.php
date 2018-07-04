@@ -1,7 +1,13 @@
 <?php
 
 class Collection extends CI_Controller {
-	
+
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/	
 	function __construct() {
  		parent::__construct();
  		$this->load->helper(array('url'));
@@ -15,6 +21,12 @@ class Collection extends CI_Controller {
 		$this->load->library('form_validation');
  	}
 
+ 	/**
+	* function notify
+	* @access public 
+	* @return void
+	*
+	*/
  	function notify () {
  		$data = new stdClass();
 
@@ -34,6 +46,12 @@ class Collection extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 
+	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
  	public function index() {
  		if ( isset( $_GET['search'] ) ) {
   			$this->search_x();
@@ -44,6 +62,12 @@ class Collection extends CI_Controller {
 		}
 	}
 
+	/**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
 	function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {
@@ -58,13 +82,19 @@ class Collection extends CI_Controller {
 		}
 	}
 
+	/**
+	* function inserer_livre
+	* @access public 
+	* @return void
+	*
+	*/
 	function inserer_livre(){
 			$this->load->library('upload');
 			if ($this->input->post('ajout_ouvrage')) {
 				if (!empty($this->input->post('titre')) AND !empty($this->input->post('isbn'))
 					AND !empty($this->input->post('edition')) AND !empty($this->input->post('pages')) ) {
 
-				 	$config['upload_path']      = 'assets/web/couverture';
+				 	$config['upload_path']      = 'assets/web/img';
 					$config['allowed_types']    = 'jpg|png|jpeg|JPG|PNG|JPEG';
 					$config['max_size']         = '10240';
 					// $config['max_width']        = '1024';
@@ -114,9 +144,15 @@ class Collection extends CI_Controller {
 			}
 	}
 
+	/**
+	* function form_uploaded_doc
+	* @access public 
+	* @return $book_path
+	*
+	*/
 	// uploaded doc only pdf
     function form_uploaded_doc() {
-		$config['upload_path']      = 'assets/web/livres';
+		$config['upload_path']      = 'assets/web';
 		$config['max_size']         = '20400';
 		$config['allowed_types']    = 'pdf|PDF';
 		$config['encrypt_name']     = true;
@@ -136,6 +172,12 @@ class Collection extends CI_Controller {
  		return $book_path	  = $data['file_name'];  	     
     }
 
+    /**
+	* function ouvrage_membre
+	* @access public 
+	* @return void
+	*
+	*/
     function ouvrage_membre() {
         $req = $this->Collection_model->ouvrage_membre();
         $d = new stdClass();

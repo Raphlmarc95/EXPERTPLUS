@@ -35,7 +35,7 @@ if(isset($_SESSION['pseudo'])===true) {
     <?php  foreach($roman as $rows): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
@@ -53,7 +53,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -94,17 +94,17 @@ Email : <?php echo $rows->email; ?>
 </div>
 </div>
 
-  <div class="columns large-5" style="text-align:center; margin-top:2em" >
-    <?php if( $this->session->userdata('pseudo') !== NULL ){ ?>
+  <div class="columns large-5 small-12" style="text-align:center; margin-top:2em" >
+    <?php // if( $this->session->userdata('pseudo') !== NULL ){ ?>
     <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
        <button class="fill_button" >
           Commencer la lecture 
           <i class="fas fa-book 2x" ></i>
        </button>
     </a>
-    <?php } else {
-        echo 'Veuillez vous connecter pour lire';
-    } ?> 
+    <?php // } else {
+        // echo 'Veuillez vous connecter pour lire';
+   // } ?> 
   </div>
 </div>
 
@@ -122,7 +122,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns small-12">
-  <span class="collection_header">th&eacuteatre</span>
+  <span class="collection_header">Th&eacuteatre</span>
 </div>
 <div class="columns small-12">
   <div class="owl-carousel owl-theme" style="border-top:1.6px solid #309958;padding-top:10px;">
@@ -131,14 +131,14 @@ Email : <?php echo $rows->email; ?>
     <?php  foreach($theatre as $rows): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
 <!-- modal infoOuvrage Romans -->
 <div class="reveal large" id="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>" data-reveal>
 
-<div class="row" style="padding:2em; background-color:#ececec; justify-content:center;">
+<div class="row" style="padding:2em;  justify-content:center;">
 
 <div class="columns medium-12 " style="margin-top:1em;">
 
@@ -149,7 +149,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -163,7 +163,7 @@ Email : <?php echo $rows->email; ?>
 
 </div>
 
-<div class="row" style="border:2px solid red">
+<div class="row" style="border:0.5px solid white">
 <div class="columns medium-6">
 <div class="columns medium-12">
 <strong><u>Specifications</u></strong>
@@ -189,7 +189,7 @@ Email : <?php echo $rows->email; ?>
 <strong>Point de vente :</strong> <?php echo $rows->point_de_vente; ?>
 </div>
 </div>
-<div class="columns large-5" style="text-align:center; margin-top:2em" >
+<div class="columns large-5  small-12" style="text-align:center; margin-top:2em" >
   <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
      <button class="fill_button" >
         Commencer la lecture 
@@ -205,7 +205,7 @@ Email : <?php echo $rows->email; ?>
 </div>
  
 <button class="close-button" data-close aria-label="Close reveal" type="button">
-<span aria-hidden="true" style="color:yellow;">&times;</span>
+<span aria-hidden="true" >&times;</span>
 </button>
 </div>
 <!--  fin modalInfoOuvrage Romans-->
@@ -223,14 +223,14 @@ Email : <?php echo $rows->email; ?>
     <?php  foreach($poesis as $rows): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
 <!-- modal infoOuvrage Romans -->
 <div class="reveal large" id="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>" data-reveal>
 
-<div class="row" style="padding:2em; background-color:#ececec; justify-content:center;">
+<div class="row" style="padding:2em;  justify-content:center;">
 
 <div class="columns medium-12 " style="margin-top:1em;">
 
@@ -241,7 +241,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -255,7 +255,7 @@ Email : <?php echo $rows->email; ?>
 
 </div>
 
-<div class="row" style="border:2px solid red">
+<div class="row" style="border:2px solid white">
 <div class="columns medium-6">
 <div class="columns medium-12">
 <strong><u>Specifications</u></strong>
@@ -281,7 +281,7 @@ Email : <?php echo $rows->email; ?>
 <strong>Point de vente :</strong> <?php echo $rows->point_de_vente; ?>
 </div>
 </div>
-<div class="columns large-5" style="text-align:center; margin-top:2em" >
+<div class="columns large-5 small-12" style="text-align:center; margin-top:2em" >
   <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
      <button class="fill_button" >
         Commencer la lecture 
@@ -297,7 +297,7 @@ Email : <?php echo $rows->email; ?>
 </div>
  
 <button class="close-button" data-close aria-label="Close reveal" type="button">
-<span aria-hidden="true" style="color:yellow;">&times;</span>
+<span aria-hidden="true">&times;</span>
 </button>
 </div>
 <!--  fin modalInfoOuvrage Romans-->
@@ -315,14 +315,14 @@ Email : <?php echo $rows->email; ?>
     <?php  foreach($literaire as $rows): ?>
       <div class="items">
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
 <!-- modal infoOuvrage Romans -->
 <div class="reveal large" id="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>" data-reveal>
 
-<div class="row" style="padding:2em; background-color:#ececec; justify-content:center;">
+<div class="row" style="padding:2em;  justify-content:center;">
 
 <div class="columns medium-12 " style="margin-top:1em;">
 
@@ -333,7 +333,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -347,7 +347,7 @@ Email : <?php echo $rows->email; ?>
 <?php echo $rows->description; ?></p>
 </div>
 
-<div class="row" style="border:2px solid red">
+<div class="row" style="border:2px solid white">
 <div class="columns medium-6">
 <div class="columns medium-12">
 <strong><u>Specifications</u></strong>
@@ -373,7 +373,7 @@ Email : <?php echo $rows->email; ?>
 <strong>Point de vente :</strong> <?php echo $rows->point_de_vente; ?>
 </div>
 </div>
-<div class="columns large-5" style="text-align:center; margin-top:2em" >
+<div class="columns large-5 small-12" style="text-align:center; margin-top:2em" >
   <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
      <button class="fill_button" >
         Commencer la lecture 
@@ -388,7 +388,7 @@ Email : <?php echo $rows->email; ?>
 </div>
  
 <button class="close-button" data-close aria-label="Close reveal" type="button">
-<span aria-hidden="true" style="color:yellow;">&times;</span>
+<span aria-hidden="true" >&times;</span>
 </button>
 </div>
 <!--  fin modalInfoOuvrage Romans-->
@@ -445,7 +445,7 @@ Email : <?php echo $rows->email; ?>
 </div> 
 
 <div class="columns medium-12">
-  <label>image </label>
+  <label>Couverture</label>
 <input type="file" name="livreChemin" id="livreChemin" />
 </div> 
 

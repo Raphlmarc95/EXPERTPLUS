@@ -38,7 +38,7 @@
 		
 		<?php if (($v->type) === 'OUVRAGE') {?>
 
-			<?php $req = "SELECT * FROM ouvrage WHERE idouvrage = $v->idmembre";
+			<?php $req = "SELECT a.*,b.pseudo FROM ouvrage a join membre b on a.id_membre=b.idmembre  and idouvrage = $v->idmembre";
 				$sql = $this->db->query($req)->result();
 				foreach ($sql as $key => $u) {?>
 
@@ -46,14 +46,17 @@
                        <div class="large-12 ouvrage">
                         <img src="<?php echo base_url('assets/img/'.$u->images); ?>" 
                       class="ouvrage thumbnail"/>
-                       <div id="info_ouvrage" style="background-color:red; position:absolute;">
-                        djshjdhs
+                       <div id="info_ouvrage">
+                      <strong><?php echo $u->titre;?></strong><br />
+                     <em> <?php echo $u->pseudo; ?></em>
+
                        </div>
                       </div>
 
                      
 
                    </div>
+                  
 
 				<?php }?>
 		
@@ -64,17 +67,18 @@
 				$sql = $this->db->query($req)->result();
 				foreach ($sql as $key => $u) {?>	
 				
-
-
-
-                         <div class="column large-2 medium-4 small-5 auteurCadreInfo">
+                 <div class="column large-2 medium-4 small-5 auteurCadreInfo">
 			    <div class="medium-12" style="padding:10px">
 			    <a href="<?php echo base_url('auteur/info?id=').$u->idmembre?>">	
-			  	 <img src="<?php echo base_url('assets/img/auteur_homme.jpg') ?>" class="circle_round" />
+			    <?php if(empty($u->photo )){ ?>
+	                <img src="<?php echo base_url('assets/avatar/avatar.png'); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
+	              <?php } else {?>
+	                 <img src="<?php echo base_url('assets/avatar/'.$u->photo ); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
+	            <?php } ?>
 			  	</a>
 			    </div>
 				<div class="medium-12" style="background-color:#2e7f4d; padding: 8px; "> 
-					<h5 style="margin-bottom:0px">  <?php echo $rows->pseudo ?></h5>
+					<h5 style="margin-bottom:0px">  <?php echo $u->pseudo ?></h5>
 				</div>
 			  </div>	
 

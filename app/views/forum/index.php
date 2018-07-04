@@ -1,6 +1,6 @@
-<div class="row" >
+<div class="row" style="margin-top:2em;">
 	<div class="columns large-12 medium-12 small-12" >
-		<h3>Bienvenue sur le forum Biblioplus</h3>
+		<h3 style="text-align:center;">Bienvenue sur le forum Biblioplus</h3>
 		<?php if (isset($_SESSION['flash'])): ?>
 				<?php foreach ($_SESSION['flash'] as $type => $message):?>
 					 <div class="alert alert-<?= $type; ?>">
@@ -14,7 +14,7 @@
 	<div class="columns large-12 medium-12 small-12">
 		<div class="columns large-12 medium-3 small-12">
 			<?php if ($this->session->userdata('pseudo') !== NULL) { ?>
-				<button id="nouveauSujet">Nouveau sujet</button> 
+				<button id="nouveauSujet" class="fill_button">Nouveau sujet</button> 
 			<?php } else {?>
 			<button id="ajouterSujet" class="fill_button"><i class="fa fa-plus"> </i>Nouveau sujet
 			</button> 
@@ -42,7 +42,7 @@
 		      <?php endif ?>
 		<?php echo form_open_multipart('forum/nouveau_sujet','class="columns medium-12 large-12"');?> 
 			<div class="columns large-12 medium-12">			
-				<h4 style="text-align: center;">Nouveau sujet</h4>
+				<h5>Poster votre nouveau sujet</h5>
 			</div>
 			<div class=" columns large-12 medium-12 ">
 				
@@ -58,9 +58,12 @@
 				<div class="columns large-9 medium-9">
 				
 					<?php $req = $this->forum_model->get_sujet_cat(); ?>
+				   
+                   
 				    <select id="categorie" name="categorie">
 				    	<option> Categorie </option>
 				    	<?php foreach ($req as $rows) :?>
+
 				      <option value="<?php echo $rows->contenu_c; ?>" ><?php echo $rows->contenu_c; ?></option>
 				       <?php endforeach?>
 				    </select>
@@ -120,22 +123,24 @@
 			<tbody>
 				<div class="columns large-12 medium-12 small-12">
 						<?php foreach ($forums as $rows): ?>
+							  
 							<tr>
 								<div class=" columns large-6 medium-6 small-6">
 									<td>
-										<p>
-											<a href="http://localhost/biblioplus/forum/view/<?php echo $rows->sujet ; ?>/<?php echo $rows->id; ?>"><?php echo $rows->sujet; ?> </a>
-										</p>
+										
+											<a href="http://localhost/biblioplus/forum/view?s=<?php echo $rows->sujet ; ?>&id=<?php echo $rows->id; ?>">
+											<span class="span_titre"><em /><?php echo $rows->sujet; ?></span> </a>
+										
 									</td>
 								</div>
 								<div class=" columns large-3 medium-3 small-3">
 									<td> 
-										<h6 style="font-weight: bold;"><?php echo $rows->topics_cat->contenu_c; ?></h6>
+										<h6><?php echo $rows->topics_cat->contenu_c; ?></h6>
 									</td>
 								</div>
 								<div class=" columns large-3 medium-3 small-3">
 									<td>
-										<p><?php echo $rows->topics_mem->pseudo; ?></p>
+										<h6><?php echo $rows->topics_mem->pseudo; ?></h6>
 									</td>
 								</div> 
 								<div class=" columns large-3 medium-3 small-3">
@@ -145,7 +150,7 @@
 								</div>
 								<div class=" columns large-3 medium-3 small-3">
 									<td>
-										<p><?php echo $rows->date_hres_creation; ?></p>
+										<?php echo $rows->date_hres_creation; ?>
 									</td>
 								</div>						
 							</tr>

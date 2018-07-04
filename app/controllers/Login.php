@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/
 	function __construct(){
 		parent::__construct();
 		$this->load->library(array('session'));
@@ -13,7 +19,13 @@ class Login extends CI_Controller {
 		$this->load->model('Recherche_model');
 	}
 
-	function notify () {
+	/**
+	* function notify
+	* @access public 
+	* @return void
+	*
+	*/
+	function notify() {
  		$data = new stdClass();
 
  		if (isset($_GET['notify_id'])) {
@@ -38,6 +50,12 @@ class Login extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 
+	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
     function index() {
     	$this->login_model->visiteurs();
     	if ( isset( $_GET['search'] ) ) {
@@ -54,8 +72,6 @@ class Login extends CI_Controller {
 				$auteur->nbr_post = $this->Auteur_model->count_post_auteur($auteur->idmembre);
 			}
 
-			// $nbr_visiteur = array();
-			// $nbr_visiteur = $this->login_model->count_nbr_visiteur(); var_dump($nbr_visiteur);
 		    $this->notify();
 		    // $this->count_membre();
 
@@ -66,6 +82,12 @@ class Login extends CI_Controller {
 		}
 	}
 
+	/**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
 	function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {
@@ -80,6 +102,12 @@ class Login extends CI_Controller {
 		}
 	}
 
+	/**
+	* function count_membre
+	* @access public 
+	* @return void
+	*
+	*/
 	function count_membre() {
 		$data = new stdClass();			
 
@@ -90,6 +118,12 @@ class Login extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 
+	/**
+	* function sign_in
+	* @access public 
+	* @return void
+	*
+	*/
 	function sign_in() {
 		// create the data object
 		$data = new stdClass();
@@ -160,6 +194,12 @@ class Login extends CI_Controller {
 		}
     }
 
+    /**
+	* function check_if_pseudo_exists
+	* @access public 
+	* @return bool
+	*
+	*/
     function check_if_pseudo_exists($request_pseudo){
     	$pseudo_available = $this->login_model->check_if_pseudo_exists($request_pseudo);
     	if ($pseudo_available) {
@@ -169,6 +209,12 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function check_if_email_exists
+	* @access public 
+	* @return bool
+	*
+	*/
     function check_if_email_exists($request_email){
     	$email_available = $this->login_model->check_if_email_exists($request_email);
     	if ($email_available) {
@@ -178,6 +224,12 @@ class Login extends CI_Controller {
     	}    	
     }
 
+    /**
+	* function ckeck_format_nom_prenom
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_format_nom_prenom($nom_prenom) {
     	if (!preg_match('/^[a-zA-Z ]+$/', trim($this->input->post('nom_prenom')))) {
     		return FALSE ;
@@ -186,6 +238,12 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function ckeck_format_sexe
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_format_sexe($sexe){
     	if (!preg_match('/^[a-zA-Z]+$/', trim($this->input->post('sexe')))) {
     		return FALSE ;    		
@@ -194,6 +252,12 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function sexe_valide
+	* @access public 
+	* @return bool
+	*
+	*/
     function sexe_valide(){
 		if ( (trim($this->input->post('sexe')) === 'Masculin') OR (trim($this->input->post('sexe')) === 'Feminin') ){
 			return TRUE;
@@ -202,6 +266,12 @@ class Login extends CI_Controller {
 		}
     }
 
+    /**
+	* function ckeck_format_pseudo
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_format_pseudo($pseudo){
     	if (!preg_match('/^[a-zA-Z0-9_]+$/', trim($this->input->post('pseudo')))) {
     		return false ;
@@ -210,6 +280,12 @@ class Login extends CI_Controller {
     	}
     } 
 
+    /**
+	* function ckeck_format_email
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_format_email($email){
     	if (filter_var(trim($this->input->post('email')), FILTER_VALIDATE_EMAIL) ) {
     		return FALSE ;
@@ -218,6 +294,12 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function ckeck_status_found
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_status_found($mem){
     	if (empty(trim($this->input->post('mem')))) {
     		return FALSE ;    		
@@ -226,6 +308,12 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function ckeck_datenaiss_found
+	* @access public 
+	* @return bool
+	*
+	*/
     function ckeck_datenaiss_found($date_naissance){
     	if (empty(trim($this->input->post('date_naissance')))) {
     		return FALSE ;    		
@@ -234,12 +322,33 @@ class Login extends CI_Controller {
     	}
     }
 
+    /**
+	* function ckeck_format_telephone
+	* @access public 
+	* @return bool
+	*
+	*/
+    function ckeck_format_telephone($telephone){
+    	if (!preg_match('/^[0-9_]+$/', trim($this->input->post('telephone')))) {
+    		return false ;
+    	} else {
+    		return TRUE ;
+    	}
+    }
+
+    /**
+	* function sign_up
+	* @access public 
+	* @return void
+	*
+	*/
 	function sign_up() {
 		$data = new stdClass();
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
+		$this->form_validation->set_rules('telephone', 'telephone', 'trim|required|callback_ckeck_format_telephone');
 		$this->form_validation->set_rules('email', 'email', 'trim|required|callback_check_if_email_exists');
 		$this->form_validation->set_rules('pseudo', 'pseudo', 'trim|required|callback_check_if_pseudo_exists');
 		$this->form_validation->set_rules('mot_de_passe', 'mot de passe', 'trim|required|min_length[8]|htmlspecialchars');
@@ -312,7 +421,6 @@ class Login extends CI_Controller {
 
 	function pas_trouve() {
 		$this->load->view('templates/header');
-		$this->load->view('errors/html/error_general');
-		
+		$this->load->view('errors/html/error_general');		
 	}
 }

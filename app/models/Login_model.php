@@ -3,12 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login_model extends CI_Model {
 
+	/**
+	* function __construct
+	* @access public
+	* @return void
+	* 
+	*/
 	function __construct() {
 		
 		parent::__construct();
 		$this->load->database();
 	}
 
+	/**
+	* function sign_in
+	* @access public
+	* @param string $pseudo
+	* @param string $pass
+	* @return object
+	* 
+	*/
 	function sign_in($pseudo, $pass){
 		
 		$this->db->select('*');
@@ -23,6 +37,12 @@ class Login_model extends CI_Model {
 		}
 	}
 
+	/**
+	* function check_if_pseudo_exists
+	* @access public
+	* @return bool
+	* 
+	*/
 	function check_if_pseudo_exists($pseudo){
 		$this->db->WHERE('pseudo', $pseudo);
 		$req = $this->db->get('inscription');
@@ -33,6 +53,13 @@ class Login_model extends CI_Model {
 		}
     }
 
+    /**
+	* function check_if_email_exists
+	* @access public
+	* @param string $email
+	* @return bool
+	* 
+	*/
     function check_if_email_exists($email){
     	$this->db->WHERE('email', $email);
 		$req = $this->db->get('inscription');
@@ -44,6 +71,12 @@ class Login_model extends CI_Model {
 		}    	
     }
 
+    /**
+	* function sign_up
+	* @access public
+	* @return void
+	* 
+	*/
 	function sign_up(){
 
 		$nom = $this->input->post('nom_prenom');
@@ -85,6 +118,15 @@ class Login_model extends CI_Model {
 		}
 	}
 
+	/**
+	* function send_confirmation_email
+	* @access private
+	* @param string $ema
+	* @param int    $user_id
+	* @param string $token
+	* @return void
+	* 
+	*/
 	private function send_confirmation_email($ema, $user_id, $token) {
 		
 		// load email library and url helper
@@ -119,7 +161,15 @@ class Login_model extends CI_Model {
 		$this->email->send();		
 	}
 
-	public function confirm_account($pseudo, $hash) {		
+	/**
+	* function confirm_account
+	* @access public
+	* @param string $pseudo
+	* @param string $hash
+	* @return bool
+	* 
+	*/
+	function confirm_account($pseudo, $hash) {		
 		// find the email for the given user
 		$email = $this->db->select('email')
 			->from('inscription')
@@ -147,6 +197,12 @@ class Login_model extends CI_Model {
 		return false;		
 	}
 
+	/**
+	* function visiteurs
+	* @access public
+	* @return void
+	* 
+	*/
 	function visiteurs () {
 		$select = "SELECT adresse_ip FROM visiteurs WHERE adresse_ip='".$_SERVER['REMOTE_ADDR']."';";
 	    $stmt_entrees = $this->db->query($select);
@@ -165,6 +221,12 @@ class Login_model extends CI_Model {
 	    $stmt = $this->db->query($requete);
 	}
 
+	/**
+	* function confirm_account
+	* @access public
+	* @return bool
+	* 
+	*/
 	function count_nbr_visiteur() {
 		$sql = "SELECT count(id) AS nbr_visiteurs FROM visiteurs";
 		return $this->db->query($sql)->result();

@@ -2,6 +2,12 @@
 
 class Forum extends CI_Controller {
 
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('form');
@@ -14,6 +20,12 @@ class Forum extends CI_Controller {
 		$this->load->model('Recherche_model');
 	}
 
+	/**
+	* function notify
+	* @access public 
+	* @return void
+	*
+	*/
 	function notify () {
  		$data = new stdClass();
 
@@ -33,6 +45,12 @@ class Forum extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 	
+	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
 	function index(){
 		if ( isset( $_GET['search'] ) ) {
   			$this->search_x();
@@ -58,6 +76,12 @@ class Forum extends CI_Controller {
 	    }
 	}
 
+	/**
+	* function cat_valide
+	* @access public 
+	* @return bool
+	*
+	*/
 	function cat_valide(){
 		if ( (trim($this->input->post('categorie')) === 'Categorie') ){
 			return FALSE;
@@ -66,6 +90,12 @@ class Forum extends CI_Controller {
 		}
     }
 
+    /**
+	* function nouveau_sujet
+	* @access public 
+	* @return void
+	*
+	*/
 	public function nouveau_sujet(){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -105,6 +135,12 @@ class Forum extends CI_Controller {
 		}
 	}
 
+	/**
+	* function view
+	* @access public 
+	* @return void
+	*
+	*/
 	function view() {
 		$data = new stdClass();
 		$this->load->helper('form');
@@ -112,8 +148,8 @@ class Forum extends CI_Controller {
 		// $s  = htmlentities($this->uri->segment(3));
 		// $id = htmlentities($this->uri->segment(4));
 
-		$s  = $_GET['s'];
-		$id = $_GET['id'];		
+		$s  = htmlspecialchars($_GET['s']);
+		$id = htmlspecialchars($_GET['id']);		
 
 
 		$forums = $this->forum_model->fetch_forum_posts($id);
@@ -131,9 +167,15 @@ class Forum extends CI_Controller {
 		// $this->load->view('templates/header');
 		$this->notify();
         $this->load->view('forum/discussions/view', $data);
-        // $this->load->view('templates/footer');
+        $this->load->view('templates/footer');
 	}
 
+	/**
+	* function comment
+	* @access public 
+	* @return void
+	*
+	*/
 	function comment (){
 
 		if ($this->input->post('poster')) {
@@ -151,6 +193,12 @@ class Forum extends CI_Controller {
 		}
 	}
 
+	/**
+	* function forum_membre
+	* @access public 
+	* @return void
+	*
+	*/
 	function forum_membre() {
 		$req = $this->forum_model->forum_membre();
 		if(!empty($req)){
@@ -167,6 +215,12 @@ class Forum extends CI_Controller {
 		}
     }
 
+    /**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
     function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {

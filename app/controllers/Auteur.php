@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auteur extends CI_Controller {
 
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Auteur_model');
@@ -18,6 +24,12 @@ class Auteur extends CI_Controller {
 		$this->load->library("pagination");
 	}
 
+	/**
+	* function notify
+	* @access public 
+	* @return void
+	*
+	*/
 	function notify () {
  		$data = new stdClass();
 
@@ -37,6 +49,12 @@ class Auteur extends CI_Controller {
 		$this->load->view('templates/header', $data);
 	}
 
+	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
 	function index() {
 		$data = new stdClass(); 
        // $this->load->view("evenement/Test", $data);
@@ -67,6 +85,12 @@ class Auteur extends CI_Controller {
 		}
 	}
 
+	/**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
 	function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {
@@ -81,6 +105,12 @@ class Auteur extends CI_Controller {
 		}
 	}
 
+	/**
+	* function info
+	* @access public 
+	* @return void
+	*
+	*/
 	function info() {
 		if ( isset( $_GET['search'] )) {
 			$this->search_x();
@@ -105,6 +135,12 @@ class Auteur extends CI_Controller {
 		}
 	}
 
+	/**
+	* function ferme_compter
+	* @access public 
+	* @return void
+	*
+	*/
 	function ferme_compter() {
 		$idmembre = $_GET['id'];
 		$this->Auteur_model->ferme_compter($idmembre);
@@ -114,6 +150,12 @@ class Auteur extends CI_Controller {
 		redirect('login/index');
 	}
 
+	/**
+	* function modifier_compte
+	* @access public 
+	* @return void
+	*
+	*/
 	function modifier_compte() {
 		if ( 	!empty($this->input->post('pseudo')) AND !empty($this->input->post('nom_prenom'))
 			AND !empty($this->input->post('email'))  AND !empty($this->input->post('telephone')) 	 ) {

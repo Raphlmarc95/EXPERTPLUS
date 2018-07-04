@@ -4,10 +4,17 @@
 
       
      
-        <h3>Le calendrier des &eacutev&eacutenements litteraires</h3>
-      
+        <h4>Le calendrier des &eacutev&eacutenements litteraires</h4>
+      <?php if (isset($_SESSION['flash'])): ?>
+              <?php foreach ($_SESSION['flash'] as $type => $message):?>
+                <div class="callout <?= $type; ?>">
+                 <?= $message; ?>            
+               </div>
+             <?php endforeach ?>
+             <?php unset($_SESSION['flash']) ?>
+          <?php endif ?>
 
-      <div class="columns large-3 medium-6 small-12" >        
+      <div class="columns large-12 medium-6 small-12 " style="text-align:right;" >        
         <a  data-open="modal_ajout_evenement" >
           <?php if ($this->session->userdata('pseudo') !== NULL) : ?>
           <i class="fa fa-plus-square"></i> Ajouter un nouvel &eacutev&eacutenement
@@ -23,7 +30,7 @@
           <?php if($req): ?>
             <?php foreach ($req as $key ): ?>
             
-      <div class=" columns large-3  medium-4 small-9"  data-open="<?php echo $key->idevenement.'event'; ?>"  style=" padding:0px; margin:10px;background-color:#dcece2;">
+      <div class=" columns large-3  medium-4 small-9 evenement"  data-open="<?php echo $key->idevenement.'event'; ?>"  style=" padding:0px; margin:10px;background-color:#dcece2;">
         
                     
          <?php if(empty($key->photo )){ ?>
@@ -45,10 +52,10 @@
            
              <div class="columns large-3 medium-4 small-4 ">
               
-                <?php if(empty($_SESSION['photo'] )){ ?>
-                  <img style="border-radius: 50%;" src="<?php echo base_url('assets/avatar/avatar.png'); ?>" width="30px" title="<?php echo $key->pseudo; ?>"  alt="photo utilisateur" />
+                <?php if(empty($key->m_foto)){ ?>
+                  <img style="border-radius: 50%; width: 35px; height: 35px; " src="<?php echo base_url('assets/avatar/avatar.png'); ?>" title="<?php echo $key->pseudo; ?>"  alt="photo utilisateur" />
                 <?php } else { ?>
-                 <img  style="border-radius: 50%;" src="<?php echo base_url('assets/avatar/'.$_SESSION['photo']); ?>" class="circle_round_evenement" />
+                 <img  style="border: 0px; width:35px; height:35px;" src="<?php echo base_url('assets/avatar/'.$key->m_foto); ?>" class="circle_round_evenement" />
                <?php } ?>
             
            </div> 
@@ -86,14 +93,28 @@
                 
             <?php if ($this->session->userdata('pseudo') !== NULL) : ?>
               <div class=" columns large-12 medium-12" style="border-bottom: 1px solid #f3f1f1; margin-bottom:5px; margin-top: 10px;">
-                   <a href="#" data-open="<?php echo $key->idevenement.'evente';  ?>" ><i class="fa fa-edit"></i>modifier </a> 
-                   <a  href="http://localhost/biblioplus/event/enlever?idevenement=<?php echo $key->idevenement; ?>" title="supprimer votre événement"><i class="fa fa-trash"></i>
-                   Supprimer  </a>              
+                   <a href="#" data-open="<?php echo $key->idevenement.'evente';  ?>" ><i class="fa fa-edit"></i>Modifier </a> 
+                   
+                   <a data-open="modal_supp_evenements"><i class="fa fa-trash"></i>
+                   Supprimer  </a> 
+
+                    
+
+
+
+
+
+
+
+
+
+
+
               </div>
             <?php endif ?>
                  <!-- fin modal suppression evenement --> 
                 <div class="columns large-12 medium-7" style="margin-top:5px;  word-wrap: break-word; text-align: justify; border-bottom: 1px solid #f3f1f1 ">
-                 <span class="span_titre">Description</span> 
+                 <span class="span_titre">Description</span> <br />
                   <span class="span_description"> <?php echo $key->description; ?></span>
                 </div>
                 <div class="columns large-12 medium-5" style="margin-top:5px;">
@@ -144,6 +165,23 @@
    
 
           <!-- Commencement modal ajout_evenement -->
+                       <div class="reveal" id="modal_supp_evenements"  data-reveal>
+<h6>Confirmation de suppression  </h6>
+<hr>
+  
+<span class="span_description" style="text-align:center;">Voulez vous vraiment supprimer cet evenement?
+</span>
+  
+<div class="columns small-12 medium-7 large-12" style="text-align:center;">  
+     
+      <button class="fill_button" aria-label="Dismiss alert" type="button" data-close>
+          NON
+        </button>      
+ <a  href="http://localhost/biblioplus/event/enlever?idevenement=<?php echo $key->idevenement; ?>" >
+ 
+        <button class="fill_button">OUI</button>  </a>
+      </div>
+      </div> 
           <div class="reveal" id="modal_ajout_evenement" data-reveal> 
 
             <div class="row">
@@ -152,28 +190,28 @@
                   <h5>Ajout d'un &eacutev&eacutenement</h5>
                 </div>
 
-              <?php if (isset($_SESSION['flash'])): ?>
-              <?php foreach ($_SESSION['flash'] as $type => $message):?>
-                <div class="alert alert-<?= $type; ?>">
-                 <?= $message; ?>            
-               </div>
-             <?php endforeach ?>
-             <?php unset($_SESSION['flash']) ?>
-          <?php endif ?>
+              
                 <?php echo form_open_multipart('event/index','class=""');?> 
                 <div class="columns large-6 medium-6" align="center">
-                  <div class="col-sm-3 text-center">
+                 <!--  <div class="col-sm-3 text-center">
                     <div class="form-group">
                       <label for="avatar">Ajouter une image descriptif .. </label>
                       <input type="file" id="avatar" name="userfile" style="word-wrap: break-word"/>
                     </div>
-                  </div>
+                  </div> -->
+                  <div class="columns large-12 medium-12">
+                  <label for="avatar" class="fill_button" > <i class="fas fa-camera 4x"></i> ajouter une image descriptive</label>
+    
+    <input type="file" id="avatar" class="show-for-sr" name="userfile" ">
+    </div>
+    
                 <div class="columns large-12 medium-12">
                   <label>Description
                     <textarea cols="10" name="descEvent" rows="5"></textarea>
                   </label>
-                </div>         
-                </div>
+                </div>   
+                </div>       
+                
                 <div class="columns large-6 medium-6">
                   <div class="columns large-12 medium-12">
                   <input type="text" name="titreEvent" placeholder="Entrez le nom " class="custom_input">
@@ -236,21 +274,25 @@
            <?php unset($_SESSION['flash']) ?>
           <?php endif ?>
                 <?php echo form_open_multipart('event/modifier','class=""');?> 
-                <div class="columns large-6 medium-6" align="center">
-                  <div class="col-sm-3 text-center">
-                   <!--  <img class="avatar" src="<?php // echo base_url('assets/img/index.jpeg') ?>">
-                    <br><br> -->
+                <div class="columns large-6 medium-6"  style= "border 2px solid; "align="center">
+               <!--    <div class="columns medium-12 large-12">
                     <div class="form-group">
                       <label for="avatar">Ajouter une image descriptif .. </label>
                       <input type="file" id="avatar" name="userfile" style="word-wrap: break-word">
                     </div>
-                  </div>
+                  </div> -->
+                  <div class="columns large-12 medium-12">
+                  <label for="avatar" class="fill_button" > <i class="fas fa-camera 4x"></i> ajouter une image descriptive</label>
+    
+    <input type="file" id="avatar" class="show-for-sr" name="userfile" ">
+    </div>
                 <div class="columns large-12 medium-12">
                   <label>Description
                     <textarea cols="10" name="descEvent" value="<?php echo $key->description; ?>" rows="5"></textarea>
                   </label>
-                </div>   <?php // echo var_dump($key->idevenement); ?>
-                </div>
+                </div>  
+                </div> <?php // echo var_dump($key->idevenement); ?>
+                
                 <input type="hidden" name="idEvent" value="<?php echo $key->idevenement; ?>">
                 <div class="columns large-6 medium-6">
                   <div class="columns large-12 medium-12">

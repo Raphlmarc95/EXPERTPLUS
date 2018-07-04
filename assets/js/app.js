@@ -20,7 +20,7 @@ $("#nav_menu").hide(10);
 $("#search").hide(100);	
 
 
-$("#user").slideToggle(350);
+
 
 $("#box_authen").slideToggle(500);
 });
@@ -56,12 +56,12 @@ $("#xox").hide(100);
     
 
 $("#xox").hide(100);
-    $("#user").hide(10);
+    
 
 
 $("#box_authen").hide(100);
 
-    $("#user").hide(10);
+  
 
 
 

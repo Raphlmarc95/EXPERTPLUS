@@ -12,7 +12,7 @@
       <?php if(($rows->categorie) === 'recit'): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
@@ -30,7 +30,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -72,16 +72,16 @@ Email : <?php echo $rows->email; ?>
 </div>
 
   <div class="columns large-5" style="text-align:center; margin-top:2em" >
-    <?php if( $this->session->userdata('pseudo') !== NULL ){ ?>
+    <?php //if( $this->session->userdata('pseudo') !== NULL ){ ?>
     <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
        <button class="fill_button" >
           Commencer la lecture 
           <i class="fas fa-book 2x" ></i>
        </button>
     </a>
-    <?php } else {
-        echo 'Veuillez vous connecter pour lire';
-    } ?> 
+    <?php //} else {
+       // echo 'Veuillez vous connecter pour lire';
+   // } ?> 
   </div>
 </div>
 
@@ -114,7 +114,7 @@ Email : <?php echo $rows->email; ?>
       <?php if(($rows->categorie) === 'theatre'): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
@@ -132,7 +132,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -174,16 +174,12 @@ Email : <?php echo $rows->email; ?>
 </div>
 
   <div class="columns large-5" style="text-align:center; margin-top:2em" >
-    <?php if( $this->session->userdata('pseudo') !== NULL ){ ?>
     <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
        <button class="fill_button" >
           Commencer la lecture 
           <i class="fas fa-book 2x" ></i>
        </button>
-    </a>
-    <?php } else {
-        echo 'Veuillez vous connecter pour lire';
-    } ?> 
+    </a> 
   </div>
 </div>
 
@@ -216,7 +212,7 @@ Email : <?php echo $rows->email; ?>
       <?php if(($rows->categorie) === 'poetique'): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
@@ -234,7 +230,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -276,16 +272,12 @@ Email : <?php echo $rows->email; ?>
 </div>
 
   <div class="columns large-5" style="text-align:center; margin-top:2em" >
-    <?php if( $this->session->userdata('pseudo') !== NULL ){ ?>
     <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
        <button class="fill_button" >
           Commencer la lecture 
           <i class="fas fa-book 2x" ></i>
        </button>
     </a>
-    <?php } else {
-        echo 'Veuillez vous connecter pour lire';
-    } ?> 
   </div>
 </div>
 
@@ -318,7 +310,7 @@ Email : <?php echo $rows->email; ?>
       <?php if(($rows->categorie) === 'litterature'): ?>
       <div class="items" >
         <a href="#" data-open="<?php echo 'modalInfoOuvrage'.$rows->idouvrage; ?>">
-        <img src="<?php echo base_url('assets/img/'.$rows->images); ?>" class="thumbnail" alt="" />
+        <img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" class="thumbnail" alt="" />
         </a>
       </div>
 
@@ -336,7 +328,7 @@ Email : <?php echo $rows->email; ?>
 </div>
 
 <div class="columns medium-6 small-12 large-3">
-<img src="<?php echo base_url('assets/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
+<img src="<?php echo base_url('assets/web/img/'.$rows->images); ?>" style="width:240px; height:290px;" alt="" class="thumbnail"/>
 
 </div>
 
@@ -378,16 +370,12 @@ Email : <?php echo $rows->email; ?>
 </div>
 
   <div class="columns large-5" style="text-align:center; margin-top:2em" >
-    <?php if( $this->session->userdata('pseudo') !== NULL ){ ?>
     <a href="../assets/web/viewer.html?file=<?php echo $rows->livre_path; ?>"> 
        <button class="fill_button" >
           Commencer la lecture 
           <i class="fas fa-book 2x" ></i>
        </button>
     </a>
-    <?php } else {
-        echo 'Veuillez vous connecter pour lire';
-    } ?> 
   </div>
 </div>
 

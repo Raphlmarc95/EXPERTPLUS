@@ -4,7 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Account extends CI_Controller {
 
 	var $data = array();
-
+	/**
+	* function __construct
+	* @access public 
+	* @return void
+	*
+	*/
 	function __construct(){
 		parent::__construct();
 		$this->load->library(array('session'));
@@ -16,8 +21,15 @@ class Account extends CI_Controller {
 
 		$this->load->model('evenement_model');
 		$this->load->model('Auteur_model');
+		$this->load->model('login_model');
 	}
 
+	/**
+	* function notify
+	* @access public 
+	* @return void
+	* 
+	*/
 	function notify () {
  		$data = new stdClass();
 
@@ -41,45 +53,43 @@ class Account extends CI_Controller {
 		$data->notifications = $notifications;
 
 		$this->load->view('templates/header', $data);
+		
 	}
- 
-	public function index() {
+ 	
+ 	/**
+	* function index
+	* @access public 
+	* @return void
+	*
+	*/
+	function index() {
 		if ( isset( $_GET['search'] )) {
 			$this->search_x();
 		} else {
 			// $data = new stdClass();
 
-			/*Test*/
-			// if ($this->session->get_userdata('logged_in')) {
-			// 	$session_data 	 = $this->session->userdata('logged_in');
-			// 	$data['id']		 = $session_data['id'];
-			// 	$data['pseudo']	 = $session_data['pseudo'];
-			// 	$data['photo'] 	 = $session_data['photo'];
-			/*Test*/
 
-				$data = new stdClass();
-				$auteurs = $this->Auteur_model->info_auteur_acc();
-				foreach ($auteurs as $auteur ) { 
-					$auteur->nbr_ouvrage = $this->Auteur_model->count_ouvrage_auteur($auteur->idmembre); 
-					$auteur->nbr_event = $this->Auteur_model->count_event_auteur($auteur->idmembre); 
-					$auteur->nbr_post = $this->Auteur_model->count_post_auteur($auteur->idmembre);
-				}
-				$data->auteurs  = $auteurs;
-				$this->notify();
-				// $this->load->view('templates/header');
-				$this->load->view('index', $data);
-				/*Test*/
-			// }else{
-			// 	redirect('user_connect', 'refresh');
-			// }
-			/*Test*/
+			$data = new stdClass();
+			$auteurs = $this->Auteur_model->info_auteur_acc();
+			foreach ($auteurs as $auteur ) { 
+				$auteur->nbr_ouvrage = $this->Auteur_model->count_ouvrage_auteur($auteur->idmembre); 
+				$auteur->nbr_event = $this->Auteur_model->count_event_auteur($auteur->idmembre); 
+				$auteur->nbr_post = $this->Auteur_model->count_post_auteur($auteur->idmembre);
+			}
+			$data->auteurs  = $auteurs;
+			$this->notify();
+			// $this->load->view('templates/header');
+			$this->load->view('index', $data);
+	        $this->load->view('templates/footer');			
 		}
 	}
-
-	// function compteur_de_visiteurs() {
-	// 	$this->login_model->visiteurs();
-	// }
 	
+	/**
+	* function search_x
+	* @access public 
+	* @return void
+	*
+	*/
 	function search_x(){
 		$data = new stdClass();	
 		if ($_GET['search']) {
@@ -94,13 +104,25 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function logout() {
+	/**
+	* function logout
+	* @access public 
+	* @return void
+	*
+	*/
+	function logout() {
 		$this->session->unset_userdata('logged_in');
 		$this->session->sess_destroy();
 		   		
 		header('Location:index');
 	}
 
+	/**
+	* function confirmation
+	* @access public 
+	* @return void
+	*
+	*/
     function confirmation(){
 		$user_id = $this->uri->segment(3);
 		$token = $this->uri->segment(4);
@@ -130,6 +152,12 @@ class Account extends CI_Controller {
 		}
     }
 
+    /**
+	* function pass_fotgot
+	* @access public 
+	* @return void
+	*
+	*/
     function pass_fotgot() {
     	$this->load->helper('form');
 
@@ -162,6 +190,12 @@ class Account extends CI_Controller {
 		}
     }
 
+    /**
+	* function password_reset
+	* @access public 
+	* @return void
+	*
+	*/
     function password_reset(){
     	$this->load->helper('form');
     	$this->load->library('form_validation');
@@ -190,6 +224,12 @@ class Account extends CI_Controller {
 		}
     }
 
+    /**
+	* function update
+	* @access public 
+	* @return void
+	*
+	*/
     function update_pass(){
     	$this->load->helper('form');
     	$this->load->library('form_validation');

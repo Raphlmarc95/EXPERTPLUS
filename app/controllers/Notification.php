@@ -4,6 +4,12 @@
  */
  class Notification extends CI_Controller {
  	
+ 	/**
+ 	* function __construct
+ 	* @access public
+ 	* @return void
+ 	*
+ 	*/
  	function __construct() {
  		parent::__construct();
  		$this->load->model('Notification_model');
@@ -11,6 +17,12 @@
 		$this->load->helper(array('url'));
  	}
 
+ 	/**
+ 	* function index
+ 	* @access public
+ 	* @return void
+ 	*
+ 	*/
  	function index () {
  		$data = new stdClass();
 
@@ -31,30 +43,4 @@
 		$this->load->view('templates/notif');
 		// $this->load->view('evenement/modifier', $data); 
 	}
-
-	// function page() {
- 
- //       $config = array();
- 
- //       $config["base_url"] = base_url() . "auteur/page";
- 
- //       $config["total_rows"] = $this->Auteur_model->record_count();
- 
- //       $config["per_page"] = 1;
- 
- //       $config["uri_segment"] = 3;
- 
- //       $this->pagination->initialize($config);
- 
- //       $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
- 
- //       $data["results"] = $this->Auteur_model->fetch_departments($config["per_page"], $page);
- 
- //       $data["links"] = $this->pagination->create_links();
- 
-	// 	// $this->load->view('templates/header');
- //       $this->load->view("evenement/Test");
-	// 	// $this->load->view('templates/footer', $data);
- //  //    $this->load->view("auteur/index");
- //    }
- }
+}

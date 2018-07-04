@@ -51,3 +51,4 @@ $lang['upload_file']               	  		   = "Il faut upload un image ";
 $lang['ckeck_status_found']            		   = "Il faut s'inscrire en tant qu'auteur ou un simple membre ";
 $lang['ckeck_datenaiss_found']            	   = "La date de naissance est requis";
 $lang['cat_valide']           			 	   = "Veuillez choisir une categorie svp.";
+$lang['ckeck_format_telephone']          	   = "Veuillez saisir un numero de telepone valide.";

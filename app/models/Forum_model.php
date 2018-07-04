@@ -35,9 +35,7 @@ class Forum_model extends CI_Model {
 				if ($key->contenu_c !== $cat ) {
 					// return false;
 				} else {
-					// $requte = 'INSERT INTO f_sujets ( idmembre, id_categorie, sujet, contenu_s, date_hres_creation) VALUES ( ?, ?, ?, ?, CURRENT_TIMESTAMP() )';
-					// $this->db->query($requte, array($user_id, $key->id, $ts, $tc ));
-
+					
 					$data = array (
 						'idmembre'				=> $user_id,
 						'id_categorie'			=> $key->id,
@@ -117,6 +115,7 @@ class Forum_model extends CI_Model {
 	/**
 	* function get_topic_mem
 	* @param int membre_id
+	* @return object
 	* 
 	*/
 	function get_topic_mem($membre_id) {
@@ -171,6 +170,7 @@ class Forum_model extends CI_Model {
 	/**
 	* function get_topic_cat
 	* @param int cat_id
+	* @return object
 	* 
 	*/
 	function get_topic_cat($cat_id) {

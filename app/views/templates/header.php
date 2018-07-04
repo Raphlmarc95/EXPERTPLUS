@@ -52,10 +52,10 @@
               <div  id="authen">
                 <div id="box_authen">
                    <a href="<?php echo base_url('login/sign_in'); ?>"> 
-                    <input type="button" name="login/sign_in" value="connecter" class="fill_button" align="center" />
+                    <input type="button" name="login/sign_in" value="Connexion" class="fill_button" align="center" style="width:80%;margin:2px;" />
                    </a> 
                    <a href="<?php echo base_url('login/sign_up'); ?>"> 
-                    <input type="button" name="login/sign_up" value="nouveau compte" class="fill_button" align="center" />
+                    <input type="button" name="login/sign_up" value="Nouveau compte" class="fill_button" align="center" />
                    </a>
                 </div>
               </div>

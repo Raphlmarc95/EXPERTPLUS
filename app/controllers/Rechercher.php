@@ -2,6 +2,12 @@
 
 class Rechercher extends CI_Controller {
 	
+	/**
+ 	* function __construct
+ 	* @access public
+ 	* @return void
+ 	*
+ 	*/
 	function __construct() 	{
 		parent::__construct();
 		$this->load->library(array('session'));
@@ -10,6 +16,12 @@ class Rechercher extends CI_Controller {
 		$this->load->model('Recherche_model');
 	}
 
+	/**
+ 	* function index
+ 	* @access public
+ 	* @return void
+ 	*
+ 	*/
 	function index(){
 		// $search = $_GET['search']; 
 		if ($_GET['search']) {
@@ -33,6 +45,12 @@ class Rechercher extends CI_Controller {
 		}
 	}
 
+	/**
+ 	* function notify
+ 	* @access public
+ 	* @return void
+ 	*
+ 	*/
 	function notify () {
  		$data = new stdClass();
 

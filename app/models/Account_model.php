@@ -3,29 +3,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Account_model extends CI_Model {
 
-	public function __construct() {
-		
+	/**
+	* function __construct
+	* @access public
+	* @return void
+	*
+	*/
+	function __construct() {		
 		parent::__construct();
 		$this->load->database();		
 	}
 
-	// function search_bar(){
-		
-	// 	if ($_GET['search_bar']) {
-	// 		// SELECT * FROM inscription WHERE nom_prenom LIKE 'b%' OR pseudo LIKE 'd%'  // LIKE "b%" OR nom_prenom LIKE "b%"
-	// 		$search = $_GET['search_bar']; 
-	// 		$sql = 'SELECT * FROM inscription WHERE pseudo = ? ';
-	// 		$query = $this->db->query($sql, array($search));
-
-	// 		if ($query->num_rows() === 1 ) {
-	// 			return $query->result_object();
-	// 		} else {
-	// 			echo "Data not found ..";
-	// 			return false;
-	// 		}
-	// 	}
-	// }
-
+	/**
+	* function fetch
+	* @access public
+	* @param int $user_id
+	* @return bool
+	*
+	*/
 	function fetch($user_id){
 		$sql = "SELECT * FROM membre WHERE idmembre = ? ";
 		$req = $this->db->query($sql, array($user_id));
@@ -36,10 +31,16 @@ class Account_model extends CI_Model {
 		}
 	}
 
+	/**
+	* function confirmation
+	* @access public
+	* @return array object
+	*
+	*/
     function confirmation(){
 
-		$user_id = $this->uri->segment(3);
-		$token = $this->uri->segment(4);
+		$user_id = htmlspecialchars($this->uri->segment(3));
+		$token   = htmlspecialchars($this->uri->segment(4));
 
 		$req = $this->db->SELECT('*');
 		$req = $this->db->from('inscription');
@@ -77,6 +78,14 @@ class Account_model extends CI_Model {
 		}
     }
 
+    /**
+	* function password_fotgot
+	* @access public
+	* @param string $reset_token
+	* @param string $email
+	* @return object
+	*
+	*/
     function password_fotgot($reset_token, $email){
 		$req = $this->db->SELECT('*');
 		$req = $this->db->from('membre');
@@ -101,8 +110,15 @@ class Account_model extends CI_Model {
 		}else{
 			 return false;
 		}
-	} 
+	}
 
+	/**
+	* function password_reset
+	* @access public
+	* @param string $reset_token
+	* @return object
+	*
+	*/
 	function password_reset( $reset_token ){
  	
 		$req = $this->db->SELECT('*');
@@ -118,6 +134,13 @@ class Account_model extends CI_Model {
 		}
 	} 
 
+	/**
+	* function update_pass
+	* @access public
+	* @param string $mot_de_passe
+	* @return bool
+	*
+	*/
 	function update_pass($mot_de_passe){
 
 		$query = "UPDATE membre SET reset_token = NULL, reset_token_at = NOW(), mot_de_passe = ? ";
@@ -130,7 +153,15 @@ class Account_model extends CI_Model {
 		}
 	}
 
-	public function send_confirmation_pass($reset_token, $email) {
+	/**
+	* function send_confirmation_pass
+	* @access public
+	* @param string $reset_token
+	* @param string $email
+	* @return void
+	*
+	*/
+	function send_confirmation_pass($reset_token, $email) {
 		
 		// load email library and url helper
 		$this->load->library('email');
@@ -163,6 +194,12 @@ class Account_model extends CI_Model {
 		return $this->email->send();		
 	}
 
+	/**
+	* function desactive_compte
+	* @access public
+	* @return void
+	*
+	*/
 	function desactive_compte() {
 		$idmembre = $_GET['idmembre'];
 		$sql = "UPDATE membre SET actif = 0 WHERE idmembre = ?";

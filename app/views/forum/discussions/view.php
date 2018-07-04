@@ -1,12 +1,13 @@
 
 
 <div class="row" id="contenair_contenu_sujet" >
-	<div class="columns large-12 medium-12"  >
-<div class="columns large-12 medium-12" id="entete">
-		<h2>Forum Biblioplus</h2>
+	<div class="columns large-12 medium-12"  style="margin-top:2em;">
+<div class="columns large-12 medium-12" >
+		<h3>Forum Biblioplus/Discussions</h3>
+		<hr>
 </div>
 
-         <div class="columns large-12 medium-12" id="box_sujet_poster">
+         <div class="columns large-12 medium-12 small-12" id="box_sujet_poster">
      <?php if (isset($_SESSION['flash'])): ?>
 		<?php foreach ($_SESSION['flash'] as $type => $message):?>
 			<div class="alert alert-<?= $type; ?>">
@@ -15,46 +16,46 @@
 		<?php endforeach ?>
 		<?php unset($_SESSION['flash']) ?>
 	<?php endif ?>
-	    <div class=" columns large-12 medium-12" id="sujet">
-	    	<?php foreach ($forums as $rows): ?> <pre><?php // var_dump($rows); ?></pre> <?php // echo var_dump($rows->sujet_info[0]->id); ?>
-		  <span class="span_description"><?php echo $rows->sujet; ?>  </span> 
+	    <div class=" columns large-12 medium-12" >
+	    	<?php foreach ($forums as $rows): ?>  
+		  <h6><?php echo $rows->sujet; ?> / <span class="span_description"><?php echo $rows->contenu_c ; ?></span>  </h6> 
 	    </div>
 
-	    <div class="columns large-12 medium-12" id="categorie">
-	    	<h6><?php echo $rows->contenu_c ; ?> </h6>
+	    <div class="columns large-12 medium-12 small-12">
+	    	<span class="span_description"></span>
 	    </div>
 	  
-	    <div class="columns large-12 medium-12" style="padding: 0px;">
+	    <div class="columns large-12 medium-12 small-12" style="padding: 0px;">
 
-	    	<div class="columns large-1 medium-1" style="padding: 0px; text-align: center; font-style: italic; color: gray;">
-	    	<div class="columns large-12 medium-12" >
+	    	<div class="columns large-1 medium-1 small-2" style="padding: 0px; text-align: center; ">
+	    	<div class="columns large-12 medium-12 small-12" >
 		    	<?php if(empty($rows->sujet_membre->photo )){ ?>
 	                <img src="<?php echo base_url('assets/avatar/avatar.png'); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
 	              <?php } else {?>
-	                 <img src="<?php echo base_url('assets/avatar/'.$_SESSION['photo']); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
+	                 <img src="<?php echo base_url('assets/avatar/'.$rows->sujet_membre->photo); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
 	            <?php } ?>
 	    	</div>
-	    	<div class="columns large-12 medium-12">
-	    	<small><span><?php echo $rows->sujet_membre->pseudo; ?></span></small>	
+	    	<div class="columns large-12 medium-12 small-12">
+	    	<span><?php echo $rows->sujet_membre->pseudo; ?></span>	
 	    	</div>
 	    	</div>
 
-	    	<div class="columns large-11 medium-11" id="contenu_sujet">
-	    	<p style="text-align: justify;">
+	    	<div class="columns large-10 medium-10 small-8" id="contenu_sujet">
+	    	<p style="text-align: center;">
 	    		<?php echo $rows->contenu_s; ?>
 	    	<?php //endforeach ?>
 	    	</p>
 	    	</div>
 	    	<?php if ($this->session->userdata('pseudo') !== null): ?>
-	    		<div class="columns large-12 medium-12">
-		    		<input type="button" id="show" value="réagir" />
+	    		<div class="columns large-10 medium-10" style=" text-align:right">
+		    		<input type="button" class="fill_button" id="show" value="Réagir" />
 		    	</div>
 	    	<?php endif ?>
 
 	    	<script type="text/javascript">
 	    		$('#show').click(function() {
 	    			// body...
-	    			$('#espace_de_reaction').show();
+	    			$('#espace_de_reaction').slideToggle();
 
 	    			$('#valider').click( function () {
 	    				// body...
@@ -90,23 +91,24 @@
 	<?php if(isset($rows->sujet_post)) :?>
 		<?php $i = $rows->sujet_post; ?>
 		<?php foreach ($i as $key => $value): ?> 
+			
 
-	<div class="columns large-12 medium-12" id="reaction">
-    	<div class="columns large-1 medium-1"style="padding: 0px; text-align: center; font-style: italic; color: gray;">
-    	<div class="columns large-12 medium-12" >
+	<div class="columns large-12 medium-12 small-12" id="reaction" style="margin-top:2em;">
+    	<div class="columns large-1 medium-1 small-2"style="padding: 0px; text-align: center; font-style: italic; color: gray;">
+    	<div class="columns large-12 medium-12 small-12" >
 		    	<?php if(empty($rows->sujet_membre->photo )){ ?>
 	                <img src="<?php echo base_url('assets/avatar/avatar.png'); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
 	              <?php } else {?>
-	                 <img src="<?php echo base_url('assets/avatar/'.$_SESSION['photo']); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
+	                 <img src="<?php echo base_url('assets/avatar/'.$value->photo ); ?>" class="thumbnail" alt="" style="border-radius: 50%" />
 	            <?php } ?>
 	    	</div>
-    	<div class="columns large-12 medium-12">
-    		<small><span><?php echo $rows->sujet_post[$key]->pseudo_poster; ?></span></small>	
+    	<div class="columns large-12 medium-12 " >
+    		<span><?php echo $rows->sujet_post[$key]->pseudo_poster; ?></span>
     	</div>
     	</div> 
-    <div class="columns large-11 medium-11 " style="text-align: justify; padding: 0px; position: relative; top: 10px;"> 
-    	<div class="columns large-12 medium-12" style="text-align: right; font-style: italic; color: gray;"><?= $rows->sujet_post[$key]->date_hres_edition; ?> </div>
-        <div class="columns large-12 medium-12">
+    <div class="columns large-11 medium-11 small-10 " style="text-align: center; padding: 0px; "> 
+    	<div class="columns large-12 medium-12" style="text-align: right;"><span class="mini"><?= $rows->sujet_post[$key]->date_hres_edition; ?> </div>
+        <div class="columns large-12 medium-12"></span>
     	<p> <?php echo $rows->sujet_post[$key]->contenu_m  ?> </p>
     	</div> 
     </div>  
